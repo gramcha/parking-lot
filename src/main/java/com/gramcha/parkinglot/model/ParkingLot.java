@@ -6,9 +6,10 @@ public class ParkingLot {
 	int numberOfSlots;
 	String id;
 	int numberOfFreeSlots;
-	
+
 	public ParkingLot(int numberOfSlots) {
 		this.numberOfSlots = numberOfSlots;
+		this.numberOfFreeSlots = numberOfSlots;
 		this.id = generateUniqueIdForParkingLot();
 	}
 

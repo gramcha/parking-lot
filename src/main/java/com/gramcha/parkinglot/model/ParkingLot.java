@@ -7,8 +7,7 @@ import java.util.UUID;
 
 public class ParkingLot {
 	private int numberOfSlots;
-	private String id;// will be useful when supporting more than one parking lot.
-	private int numberOfFreeSlots;
+	private String id;// will be useful when supporting more than one parking lot.\
 	private Map<Integer, Car> allotedSlots;
 	private TreeSet<Integer> sortedFreeSlots;
 
@@ -20,7 +19,7 @@ public class ParkingLot {
 
 	private void init(int numberOfSlots) {
 		this.numberOfSlots = numberOfSlots;
-		this.numberOfFreeSlots = numberOfSlots;
+		
 		this.id = generateUniqueIdForParkingLot();
 		//as per requirement slot number starts from 1.
 		for (int i = 1; i <= numberOfSlots; i++) {
@@ -42,21 +41,17 @@ public class ParkingLot {
 	}																									
 
 	public int getNumberOfFreeSlots() {
-		return numberOfFreeSlots;
+		return sortedFreeSlots.size();
 	}
 
 	public Ticket allocateSlot(Car car) {
-		if(numberOfFreeSlots<1) {
-			Ticket ticket = new Ticket(car.getRegistrationNumber(),car.getColor(),-1);
-			return ticket;
-		}
 		Integer availableFreeSlot = getAvailableFreeSlotCloserToEntry();
 		if(availableFreeSlot==null) {
 			Ticket ticket = new Ticket(car.getRegistrationNumber(),car.getColor(),-1);
 			return ticket;
 		}
 		allotedSlots.put(availableFreeSlot, car);
-		numberOfFreeSlots--;
+		
 		Ticket ticket = new Ticket(car.getRegistrationNumber(),car.getColor(),availableFreeSlot);
 		return ticket;
 	}

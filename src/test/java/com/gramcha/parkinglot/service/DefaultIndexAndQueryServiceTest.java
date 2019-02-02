@@ -11,6 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.gramcha.parkinglot.model.Car;
+import com.gramcha.parkinglot.model.ParkingLot;
 import com.gramcha.parkinglot.model.Ticket;
 import com.gramcha.parkinglot.service.impl.DefaultParkingLotService;
 
@@ -19,7 +20,7 @@ public class DefaultIndexAndQueryServiceTest {
 	static final int noOfParkingSlots = 10;
 	
 	private IndexAndQueryService indexAndQueryService;
-
+	private ParkingLot parkingLotInstance;
 	@BeforeClass
 	public static void initParkingLotService() {
 		parkingLotService = new DefaultParkingLotService();
@@ -27,6 +28,7 @@ public class DefaultIndexAndQueryServiceTest {
 
 	@Before
 	public void beforeEachTest() {
+		parkingLotInstance = parkingLotService.createParkingLot(noOfParkingSlots);
 		indexAndQueryService = parkingLotService.getIndexAndQueryService();
 	}
 

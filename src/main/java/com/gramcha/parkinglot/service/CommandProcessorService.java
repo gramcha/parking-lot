@@ -42,14 +42,32 @@ public abstract class CommandProcessorService {
 			processRegistrationNumbersForCarsWithColourCommand(inputStrArr);
 			break;
 		case Constants.SLOT_NUMBERS_FOR_CARS_WITH_COLOUR:
-			if(inputStrArr.length != 2) {
-				throw new Exception("Invalid no of arguments for command : " + Constants.SLOT_NUMBERS_FOR_CARS_WITH_COLOUR);
-			}
-			throw new Exception("no implementation"); 
+			processSlotNumbersForCarsWithColourCommand(inputStrArr);
+			break;
 		case Constants.SLOT_NUMBER_FOR_REGISTRATION_NUMBER:
 			break;
 		default:
 			System.out.println("Invalid command");
+		}
+	}
+
+	private void processSlotNumbersForCarsWithColourCommand(String[] inputStrArr) throws Exception {
+		if(inputStrArr.length != 2) {
+			throw new Exception("Invalid no of arguments for command : " + Constants.SLOT_NUMBERS_FOR_CARS_WITH_COLOUR);
+		}
+		IndexAndQueryService indexAndQueryService = parkingLotService.getIndexAndQueryService();
+		List<Integer> slotNumbers = indexAndQueryService.getSlotNumbersOfAllocatedCar(inputStrArr[1]);
+		if(slotNumbers.isEmpty()) {
+			System.out.println("Not found");
+		} else {
+			Iterator<Integer> itr = slotNumbers.iterator();
+			StringBuilder builder = new StringBuilder();
+			while(itr.hasNext()) {
+				builder.append(itr.next());
+				if(itr.hasNext())
+					builder.append(", ");
+			}
+			System.out.println(builder.toString());
 		}
 	}
 

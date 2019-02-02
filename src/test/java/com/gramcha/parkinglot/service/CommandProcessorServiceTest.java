@@ -95,4 +95,8 @@ public class CommandProcessorServiceTest {
 			assertTrue(false);
 		}
 	}
+	@Test(expected=Exception.class)
+	public void WhenInValidSlot_numbers_for_cars_with_colourCommandGivenThereShouldBeAnException() throws Exception {
+		commandProcessorService.process("slot_numbers_for_cars_with_colour White 12");
+	}
 }

@@ -11,7 +11,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.gramcha.parkinglot.model.Car;
-import com.gramcha.parkinglot.model.ParkingLot;
 import com.gramcha.parkinglot.model.Ticket;
 import com.gramcha.parkinglot.service.impl.DefaultParkingLotService;
 

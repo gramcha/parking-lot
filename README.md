@@ -36,4 +36,11 @@ Here, following things are happening
 		* In two ways we can get the sorted result.
 			1. Maintaining the free slots in List<> and sorting them before allocating(removing slot) from that list.
 			2. Keeping the free slots itself in a sorted manner. We can use the TreeSet where objects are stored in a sorted and ascending order. Lets choose this option.
+
+## 4. Deallocating a slot when car leaves the parking lot.
+```
+Problem statement: At the exit the customer returns the ticket which then marks the slot they were using as being available.
+```
+
+We need to remove the slot from alloted slots collection and add that slot into free available slots
 			

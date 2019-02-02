@@ -5,7 +5,8 @@ import java.util.UUID;
 public class ParkingLot {
 	int numberOfSlots;
 	String id;
-
+	int numberOfFreeSlots;
+	
 	public ParkingLot(int numberOfSlots) {
 		this.numberOfSlots = numberOfSlots;
 		this.id = generateUniqueIdForParkingLot();
@@ -23,6 +24,9 @@ public class ParkingLot {
 	public String getId() {
 		return id;
 	}
-	
+
+	public int getNumberOfFreeSlots() {
+		return numberOfFreeSlots;
+	}
 
 }

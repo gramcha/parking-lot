@@ -9,12 +9,17 @@ import com.gramcha.parkinglot.service.ParkingLotService;
 
 public class DefaultParkingLotService implements ParkingLotService{
 
+	//this is to support future requirement like having more than one parking lot.
 	Map<String, ParkingLot> parkingLots = new HashMap<>();
+	
+	//this holds the recently created parking lot - as per current requirement single parking lot.
+	ParkingLot currentLot; 
+	
 	public ParkingLot createParkingLot(int noOfParkingSlots) {
 		// TODO Auto-generated method stub
 		ParkingLot newParkingLot = new ParkingLot(noOfParkingSlots);
 		parkingLots.put(newParkingLot.getId(), newParkingLot);
+		currentLot = newParkingLot;
 		return newParkingLot;
 	}
-
 }

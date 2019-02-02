@@ -15,13 +15,15 @@ import com.gramcha.parkinglot.service.impl.DefaultParkingLotService;
 
 public class DefaultParkingLotServiceTest {
 	private static ParkingLotService parkingLotService;
+	ParkingLot parkingLotInstance;
 	@BeforeClass
 	public static void initParkingLotService() {
 		parkingLotService = new DefaultParkingLotService();
 	}
 	@Before
 	public void beforeEachTest() {
-		//as of now nothing
+		int noOfParkingSlots = 10;
+		parkingLotInstance  = parkingLotService.createParkingLot(noOfParkingSlots);
 	}
 	@After
 	public void aeforeEachTest() {
@@ -33,5 +35,10 @@ public class DefaultParkingLotServiceTest {
 		ParkingLot newParkingLot  = parkingLotService.createParkingLot(noOfParkingSlots);
 	    assertNotNull(newParkingLot);
 	    assertEquals(noOfParkingSlots, newParkingLot.getNumberOfSlots());
+	}
+	
+	@Test
+	public void whenParkingLotCreatedItsFreeSlotsShouldBeEqualToCapacity() {
+		assertEquals(parkingLotInstance.getNumberOfSlots(),parkingLotInstance.getNumberOfFreeSlots());
 	}
 }

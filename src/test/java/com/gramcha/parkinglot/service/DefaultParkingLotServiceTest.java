@@ -1,10 +1,7 @@
 package com.gramcha.parkinglot.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
-
-
 
 import org.junit.After;
 import org.junit.Before;
@@ -20,93 +17,101 @@ public class DefaultParkingLotServiceTest {
 	private static ParkingLotService parkingLotService;
 	static final int noOfParkingSlots = 10;
 	ParkingLot parkingLotInstance;
+
 	@BeforeClass
 	public static void initParkingLotService() {
 		parkingLotService = new DefaultParkingLotService();
 	}
+
 	@Before
 	public void beforeEachTest() {
-		parkingLotInstance  = parkingLotService.createParkingLot(noOfParkingSlots);
+		parkingLotInstance = parkingLotService.createParkingLot(noOfParkingSlots);
 	}
+
 	@After
 	public void aeforeEachTest() {
-		//as of now nothing
+		// as of now nothing
 	}
+
 	@Test
 	public void createParkinglotForGivenNumberOfSlotsAndReturnParkingLotId() {
-		ParkingLot newParkingLot  = parkingLotService.createParkingLot(noOfParkingSlots);
-	    assertNotNull(newParkingLot);
-	    assertEquals(noOfParkingSlots, newParkingLot.getNumberOfSlots());
+		ParkingLot newParkingLot = parkingLotService.createParkingLot(noOfParkingSlots);
+		assertNotNull(newParkingLot);
+		assertEquals(noOfParkingSlots, newParkingLot.getNumberOfSlots());
 	}
-	
+
 	@Test
 	public void whenParkingLotCreatedItsFreeSlotsShouldBeEqualToCapacity() {
-		assertEquals(parkingLotInstance.getNumberOfSlots(),parkingLotInstance.getNumberOfFreeSlots());
+		assertEquals(parkingLotInstance.getNumberOfSlots(), parkingLotInstance.getNumberOfFreeSlots());
 	}
-	
+
 	@Test
 	public void whenParkingLotHaveFreeSlotsAllocateASlotToACar() {
-		Car car = new Car("KA-01-HH-1234","White");
+		Car car = new Car("KA-01-HH-1234", "White");
 		Ticket ticket = parkingLotService.allocateSlot(car);
-		assertEquals(car.getRegistrationNumber(),ticket.getRegistrationNumber());
-		assertEquals(car.getColor(),ticket.getColor());
-		assertEquals(true,ticket.isAlloted());
+		assertEquals(car.getRegistrationNumber(), ticket.getRegistrationNumber());
+		assertEquals(car.getColor(), ticket.getColor());
+		assertEquals(true, ticket.isAlloted());
 		System.out.println(ticket);
 	}
-	
+
 	@Test
 	public void allocateAllAvailableSlots() {
-		for(int i=0;i<noOfParkingSlots;i++) {
-			Car car = new Car("KA-01-HH-1234"+i,"White");
+		for (int i = 0; i < noOfParkingSlots; i++) {
+			Car car = new Car("KA-01-HH-1234" + i, "White");
 			Ticket ticket = parkingLotService.allocateSlot(car);
-			assertEquals(car.getRegistrationNumber(),ticket.getRegistrationNumber());
-			assertEquals(car.getColor(),ticket.getColor());
-			assertEquals(true,ticket.isAlloted());
+			assertEquals(car.getRegistrationNumber(), ticket.getRegistrationNumber());
+			assertEquals(car.getColor(), ticket.getColor());
+			assertEquals(true, ticket.isAlloted());
 			System.out.println(ticket);
 		}
 	}
-	
+
 	@Test
 	public void whenThereIsNoFreeSlotShouldReturnParkingFullMessage() {
-		//first allocate all the slots
-		for(int i=0;i<noOfParkingSlots;i++) {
-			Car car = new Car("KA-01-HH-1234"+i,"White");
+		// first allocate all the slots
+		for (int i = 0; i < noOfParkingSlots; i++) {
+			Car car = new Car("KA-01-HH-1234" + i, "White");
 			Ticket ticket = parkingLotService.allocateSlot(car);
 			System.out.println(ticket);
 		}
-		Car car = new Car("KA-01-HH-9999","White");
+		Car car = new Car("KA-01-HH-9999", "White");
 		Ticket ticket = parkingLotService.allocateSlot(car);
-		assertEquals(false,ticket.isAlloted());
-		assertEquals("Sorry, parking lot is full",ticket.toString());
+		assertEquals(false, ticket.isAlloted());
+		assertEquals("Sorry, parking lot is full", ticket.toString());
 		System.out.println(ticket);
 	}
+
 	@Test
 	public void whenThereIsAFreeSlotNearToEntryAllocateThatToIncomingCar() {
-		//TODO: to simulate this case we need to remove some car closer to entry. We can revisit this after completing deallocation of a slot.
-		Car car = new Car("KA-01-HH-9999","White");
+		// TODO: to simulate this case we need to remove some car closer to entry. We
+		// can revisit this after completing deallocation of a slot.
+		Car car = new Car("KA-01-HH-9999", "White");
 		Ticket ticket = parkingLotService.allocateSlot(car);
 		System.out.println(ticket);
 		String message = parkingLotService.deallocateSlot(ticket.getAllottedSlot());
 		assertNotNull(message);
 		System.out.println(message);
 		ticket = parkingLotService.allocateSlot(car);
-		assertEquals(1,ticket.getAllottedSlot());
+		assertEquals(1, ticket.getAllottedSlot());
 		System.out.println(ticket);
 	}
-	
+
 	@Test
 	public void whenCarLeavesFromParkingLotThatSlotShouldBecomeFree() {
-		Car car = new Car("KA-01-HH-9999","White");
+		Car car = new Car("KA-01-HH-9999", "White");
 		Ticket ticket = parkingLotService.allocateSlot(car);
 		System.out.println(ticket);
 		String message = parkingLotService.deallocateSlot(ticket.getAllottedSlot());
-		assertEquals("Slot number "+ticket.getAllottedSlot()+" is free",message);
+		assertEquals("Slot number " + ticket.getAllottedSlot() + " is free", message);
 		System.out.println(message);
 	}
+
 	@Test
 	public void whenDeallocationSlotIsNotInParkingLotCapacityReturnsNotFoundMessage() {
 		String message = parkingLotService.deallocateSlot(-100);
-		assertEquals("Not found",message);
+		assertEquals("Not found", message);
 		System.out.println(message);
 	}
+
 }

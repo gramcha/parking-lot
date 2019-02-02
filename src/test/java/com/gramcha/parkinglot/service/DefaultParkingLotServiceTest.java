@@ -18,6 +18,7 @@ import com.gramcha.parkinglot.service.impl.DefaultParkingLotService;
 
 public class DefaultParkingLotServiceTest {
 	private static ParkingLotService parkingLotService;
+	static final int noOfParkingSlots = 10;
 	ParkingLot parkingLotInstance;
 	@BeforeClass
 	public static void initParkingLotService() {
@@ -25,7 +26,6 @@ public class DefaultParkingLotServiceTest {
 	}
 	@Before
 	public void beforeEachTest() {
-		int noOfParkingSlots = 10;
 		parkingLotInstance  = parkingLotService.createParkingLot(noOfParkingSlots);
 	}
 	@After
@@ -34,7 +34,6 @@ public class DefaultParkingLotServiceTest {
 	}
 	@Test
 	public void createParkinglotForGivenNumberOfSlotsAndReturnParkingLotId() {
-		int noOfParkingSlots = 10;
 		ParkingLot newParkingLot  = parkingLotService.createParkingLot(noOfParkingSlots);
 	    assertNotNull(newParkingLot);
 	    assertEquals(noOfParkingSlots, newParkingLot.getNumberOfSlots());
@@ -51,7 +50,34 @@ public class DefaultParkingLotServiceTest {
 		Ticket ticket = parkingLotService.allocateSlot(car);
 		assertEquals(car.getRegistrationNumber(),ticket.getRegistrationNumber());
 		assertEquals(car.getColor(),ticket.getColor());
-		assertNotEquals("-1",ticket.getAllottedSlot());
+		assertNotEquals(-1,ticket.getAllottedSlot());
+		System.out.println(ticket);
+	}
+	
+	@Test
+	public void allocateAllAvailableSlots() {
+		for(int i=0;i<noOfParkingSlots;i++) {
+			Car car = new Car("KA-01-HH-1234"+i,"White");
+			Ticket ticket = parkingLotService.allocateSlot(car);
+			assertEquals(car.getRegistrationNumber(),ticket.getRegistrationNumber());
+			assertEquals(car.getColor(),ticket.getColor());
+			assertNotEquals(-1,ticket.getAllottedSlot());
+			System.out.println(ticket);
+		}
+	}
+	
+	@Test
+	public void whenThereIsNoFreeSlotShouldReturnParkingFullMessage() {
+		//first allocate all the slots
+		for(int i=0;i<noOfParkingSlots;i++) {
+			Car car = new Car("KA-01-HH-1234"+i,"White");
+			Ticket ticket = parkingLotService.allocateSlot(car);
+			System.out.println(ticket);
+		}
+		Car car = new Car("KA-01-HH-9999","White");
+		Ticket ticket = parkingLotService.allocateSlot(car);
+		assertEquals(-1,ticket.getAllottedSlot());
+		assertEquals("Sorry, parking lot is full",ticket.toString());
 		System.out.println(ticket);
 	}
 }

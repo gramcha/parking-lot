@@ -2,6 +2,9 @@ package com.gramcha.parkinglot.service;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.Iterator;
+import java.util.List;
+
 import com.gramcha.parkinglot.Constants;
 import com.gramcha.parkinglot.model.Car;
 import com.gramcha.parkinglot.model.Ticket;
@@ -36,10 +39,8 @@ public abstract class CommandProcessorService {
 			processStatusCommand(inputStrArr);
 			break;
 		case Constants.REGISTRATION_NUMBERS_FOR_CARS_WITH_COLOUR:
-			if(inputStrArr.length != 2) {
-				throw new Exception("Invalid no of arguments for command : " + Constants.REGISTRATION_NUMBERS_FOR_CARS_WITH_COLOUR);
-			}
-			throw new Exception("no implementation");
+			processRegistrationNumbersForCarsWithColourCommand(inputStrArr);
+			break;
 		case Constants.SLOT_NUMBERS_FOR_CARS_WITH_COLOUR:
 			break;
 		case Constants.SLOT_NUMBER_FOR_REGISTRATION_NUMBER:
@@ -49,13 +50,31 @@ public abstract class CommandProcessorService {
 		}
 	}
 
+	private void processRegistrationNumbersForCarsWithColourCommand(String[] inputStrArr) throws Exception {
+		if(inputStrArr.length != 2) {
+			throw new Exception("Invalid no of arguments for command : " + Constants.REGISTRATION_NUMBERS_FOR_CARS_WITH_COLOUR);
+		}
+		IndexAndQueryService indexAndQueryService = parkingLotService.getIndexAndQueryService();
+		List<String> registrationNumbers = indexAndQueryService.getCarRegistrationNumbers(inputStrArr[1]);
+		if(registrationNumbers.isEmpty()) {
+			System.out.println("Not found");
+		} else {
+			Iterator<String> itr = registrationNumbers.iterator();
+			StringBuilder builder = new StringBuilder();
+			while(itr.hasNext()) {
+				builder.append(itr.next());
+				if(itr.hasNext())
+					builder.append(", ");
+			}
+			System.out.println(builder.toString());
+		}
+	}
+
 	private void processStatusCommand(String[] inputStrArr) throws Exception {
 		if(inputStrArr.length != 1) {
 			throw new Exception("Invalid no of arguments for command : " + Constants.STATUS);
 		}
 		IndexAndQueryService indexAndQueryService = parkingLotService.getIndexAndQueryService();
-		if(null==indexAndQueryService)
-			System.out.println("indexAndQueryService = null");
 		indexAndQueryService.printStatus();
 	}
 

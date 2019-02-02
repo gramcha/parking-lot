@@ -84,8 +84,6 @@ public class DefaultParkingLotServiceTest {
 
 	@Test
 	public void whenThereIsAFreeSlotNearToEntryAllocateThatToIncomingCar() {
-		// TODO: to simulate this case we need to remove some car closer to entry. We
-		// can revisit this after completing deallocation of a slot.
 		Car car = new Car("KA-01-HH-9999", "White");
 		Ticket ticket = parkingLotService.allocateSlot(car);
 		System.out.println(ticket);

@@ -14,4 +14,6 @@ public interface IndexAndQueryService {
 	Integer getSlotNumberOfAllocatedCar(String registrationNumber);
 	List<Integer> getSlotNumbersOfAllocatedCar(String color);
 	
+	//print status
+	void printStatus(); 
 }

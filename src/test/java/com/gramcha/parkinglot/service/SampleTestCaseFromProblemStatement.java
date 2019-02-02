@@ -90,7 +90,8 @@ public class SampleTestCaseFromProblemStatement {
 		String message = parkingLotService.deallocateSlot(ticket4.getAllottedSlot());
 		assertNotNull(message);
 		System.out.println(message);
-		
+//		status
+		indexAndQueryService.printStatus();
 //		park KA-01-P-333 White
 //		park DL-12-AA-9999 White
 		

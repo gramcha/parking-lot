@@ -1,6 +1,6 @@
 package com.gramcha.parkinglot.model;
 
-public class Ticket {
+public class Ticket implements Comparable<Ticket>{
 	private String registrationNumber;
 	private String color;
 	private int allottedSlot;
@@ -35,5 +35,12 @@ public class Ticket {
 		} else {
 			return "Allocated slot number: " + getAllottedSlot();
 		}
+	}
+
+	
+
+	@Override
+	public int compareTo(Ticket t) {
+		return this.allottedSlot - t.allottedSlot;
 	}
 }

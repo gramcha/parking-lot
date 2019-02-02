@@ -1,9 +1,12 @@
 package com.gramcha.parkinglot.service.impl;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import com.gramcha.parkinglot.model.Ticket;
@@ -65,6 +68,38 @@ public class DefaultIndexAndQueryService implements IndexAndQueryService {
 			return t.getAllottedSlot();
 		}).collect(Collectors.toList());
 		return slotNumbers;
+	}
+
+	@Override
+	public void printStatus() {
+		String header = "Slot No.\tRegistration No\tColour";
+		System.out.println(header);
+		Comparator<Entry<String, Ticket>> valueComparator = getValueComparator();
+		Map<String, Ticket> result = registrationNumberBasedIndex.entrySet()
+										.stream()
+										.sorted(valueComparator)
+										.collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2, LinkedHashMap::new));
+		StringBuilder builder = new StringBuilder();
+		result.forEach((key, value) -> {
+			builder.append(value.getAllottedSlot());
+			builder.append("\t");
+			builder.append(value.getRegistrationNumber());
+			builder.append("\t");
+			builder.append(value.getColor());
+			builder.append("\n");
+		});
+		System.out.println(builder.toString());
+	}
+
+	private Comparator<Entry<String, Ticket>> getValueComparator() {
+		return new Comparator<Entry<String, Ticket>>() {
+			@Override
+			public int compare(Entry<String, Ticket> e1, Entry<String, Ticket> e2) {
+				Ticket v1 = e1.getValue();
+				Ticket v2 = e2.getValue();
+				return v1.compareTo(v2);
+			}
+		};
 	}
 
 }

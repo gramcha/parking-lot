@@ -110,7 +110,7 @@ public class CommandProcessorServiceTest {
 	}
 	@Test(expected=Exception.class)
 	public void WhenInValidSlot_number_for_registration_numberCommandGivenThereShouldBeAnException() throws Exception {
-		commandProcessorService.process("slot_number_for_registration_number KA-01-HH-3141");
+		commandProcessorService.process("slot_number_for_registration_number KA-01-HH-3141 23");
 	}
 	
 	@Test

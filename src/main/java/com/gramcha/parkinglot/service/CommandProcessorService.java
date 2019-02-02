@@ -36,7 +36,10 @@ public abstract class CommandProcessorService {
 			processStatusCommand(inputStrArr);
 			break;
 		case Constants.REGISTRATION_NUMBERS_FOR_CARS_WITH_COLOUR:
-			break;
+			if(inputStrArr.length != 2) {
+				throw new Exception("Invalid no of arguments for command : " + Constants.REGISTRATION_NUMBERS_FOR_CARS_WITH_COLOUR);
+			}
+			throw new Exception("no implementation");
 		case Constants.SLOT_NUMBERS_FOR_CARS_WITH_COLOUR:
 			break;
 		case Constants.SLOT_NUMBER_FOR_REGISTRATION_NUMBER:

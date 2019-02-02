@@ -73,4 +73,13 @@ public class CommandProcessorServiceTest {
 	public void WhenInValidStatusCommandGivenThereShouldBeAnException() throws Exception {
 		commandProcessorService.process("status 12");
 	}
+	@Test
+	public void WhenValidRegistration_numbers_for_cars_with_colourCommandGivenThereShouldNotBeAnyException() {
+		try {
+			commandProcessorService.process("registration_numbers_for_cars_with_colour White");
+		} catch (Exception e) {
+			System.out.println(e);
+			assertTrue(false);
+		}
+	}
 }

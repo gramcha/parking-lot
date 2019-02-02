@@ -1,5 +1,7 @@
 package com.gramcha.parkinglot.service;
 
+import static org.junit.Assert.assertNotNull;
+
 import com.gramcha.parkinglot.Constants;
 import com.gramcha.parkinglot.model.Car;
 import com.gramcha.parkinglot.model.Ticket;
@@ -28,10 +30,8 @@ public abstract class CommandProcessorService {
 			processParkCommand(inputStrArr);
 			break;
 		case Constants.LEAVE:
-			if(inputStrArr.length != 2) {
-				throw new Exception("Invalid no of arguments for command : " + Constants.LEAVE);
-			}
-			throw new Exception("no implementation");
+			processLeaveCommand(inputStrArr);
+			break;
 		case Constants.STATUS:
 			break;
 		case Constants.REGISTRATION_NUMBERS_FOR_CARS_WITH_COLOUR:
@@ -43,6 +43,15 @@ public abstract class CommandProcessorService {
 		default:
 			System.out.println("Invalid command");
 		}
+	}
+
+	private void processLeaveCommand(String[] inputStrArr) throws Exception {
+		if(inputStrArr.length != 2) {
+			throw new Exception("Invalid no of arguments for command : " + Constants.LEAVE);
+		}
+		int allottedSlotNumber = Integer.parseInt(inputStrArr[1]);
+		String message = parkingLotService.deallocateSlot(allottedSlotNumber);
+		System.out.println(message);
 	}
 
 	private void processParkCommand(String[] inputStrArr) throws Exception {

@@ -55,4 +55,8 @@ public class CommandProcessorServiceTest {
 			assertTrue(false);
 		}
 	}
+	@Test(expected=Exception.class)
+	public void WhenInValidCommandForLeavingACarGivenThereShouldBeAnException() throws Exception {
+		commandProcessorService.process("leave");
+	}
 }

@@ -41,7 +41,6 @@ public class DefaultIndexAndQueryService implements IndexAndQueryService {
 		List<Ticket> tickets = colorBasedIndex.get(color);
 		if (tickets == null)
 			return new ArrayList<String>();
-		System.out.println(tickets.size());
 		List<String> regNumbers = tickets.stream().map(t -> {
 			return t.getRegistrationNumber();
 		}).collect(Collectors.toList());
@@ -62,7 +61,6 @@ public class DefaultIndexAndQueryService implements IndexAndQueryService {
 		List<Ticket> tickets = colorBasedIndex.get(color);
 		if (tickets == null)
 			return new ArrayList<Integer>();
-		System.out.println(tickets.size());
 		List<Integer> slotNumbers = tickets.stream().map(t -> {
 			return t.getAllottedSlot();
 		}).collect(Collectors.toList());

@@ -28,6 +28,6 @@ public class DefaultParkingLotService implements ParkingLotService{
 		return currentLot.allocateSlot(car);
 	}
 	public String deallocateSlot(int slotNumber) {
-		return null;
+		return currentLot.deallocateSlot(slotNumber);
 	}
 }

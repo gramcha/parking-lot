@@ -65,4 +65,14 @@ public class ParkingLot {
 	private Integer getAvailableFreeSlotCloserToEntry() {
 		return sortedFreeSlots.pollFirst();
 	}
+	
+	public String deallocateSlot(int slotNumber) {
+		if((slotNumber>0 && slotNumber<= numberOfSlots)==false)
+			return "Not found";
+		if(allotedSlots.containsKey(slotNumber)) {
+			allotedSlots.remove(slotNumber);
+		}
+		sortedFreeSlots.add(slotNumber);
+		return "Slot number "+slotNumber+" is free";
+	}
 }

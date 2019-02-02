@@ -83,7 +83,15 @@ public class DefaultParkingLotServiceTest {
 	@Test
 	public void whenThereIsAFreeSlotNearToEntryAllocateThatToIncomingCar() {
 		//TODO: to simulate this case we need to remove some car closer to entry. We can revisit this after completing deallocation of a slot.
-		
+		Car car = new Car("KA-01-HH-9999","White");
+		Ticket ticket = parkingLotService.allocateSlot(car);
+		System.out.println(ticket);
+		String message = parkingLotService.deallocateSlot(ticket.getAllottedSlot());
+		assertNotNull(message);
+		System.out.println(message);
+		ticket = parkingLotService.allocateSlot(car);
+		assertEquals(1,ticket.getAllottedSlot());
+		System.out.println(ticket);
 	}
 	
 	@Test
@@ -92,7 +100,13 @@ public class DefaultParkingLotServiceTest {
 		Ticket ticket = parkingLotService.allocateSlot(car);
 		System.out.println(ticket);
 		String message = parkingLotService.deallocateSlot(ticket.getAllottedSlot());
-		assertNotNull(message);
+		assertEquals("Slot number "+ticket.getAllottedSlot()+" is free",message);
+		System.out.println(message);
+	}
+	@Test
+	public void whenDeallocationSlotIsNotInParkingLotCapacityReturnsNotFoundMessage() {
+		String message = parkingLotService.deallocateSlot(-100);
+		assertEquals("Not found",message);
 		System.out.println(message);
 	}
 }

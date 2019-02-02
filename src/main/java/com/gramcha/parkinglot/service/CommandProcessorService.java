@@ -1,21 +1,27 @@
 package com.gramcha.parkinglot.service;
 
 import com.gramcha.parkinglot.Constants;
+import com.gramcha.parkinglot.service.impl.DefaultParkingLotService;
 
 public abstract class CommandProcessorService {
+	private ParkingLotService parkingLotService = new DefaultParkingLotService();
+	
+
 	public abstract void parse() throws Exception;
 
 	public void process(String line) throws Exception {
+//		IndexAndQueryService indexAndQueryService = parkingLotService.getIndexAndQueryService();
+		
 		String[] inputStrArr = line.split(" ");
 		if (inputStrArr[0].equals("")) {
 			System.out.println("Invalid command");
 			return;
 		}
 		String commandStr = inputStrArr[0];
-		switch(commandStr) {
+		switch (commandStr) {
 		case Constants.CREATE_PARKING_LOT:
-			throw new Exception("no implementation");
-			
+			processCreateParkingLotCommand(inputStrArr);
+			break;
 		case Constants.PARK:
 			break;
 		case Constants.LEAVE:
@@ -31,5 +37,13 @@ public abstract class CommandProcessorService {
 		default:
 			System.out.println("Invalid command");
 		}
+	}
+
+	private void processCreateParkingLotCommand(String[] inputStrArr) throws Exception {
+		if(inputStrArr.length != 2) {
+			throw new Exception("Invalid no of arguments for command : " + Constants.CREATE_PARKING_LOT);
+		} 
+		int noOfParkingSlots = Integer.parseInt(inputStrArr[1]);
+		parkingLotService.createParkingLot(noOfParkingSlots);
 	}
 }

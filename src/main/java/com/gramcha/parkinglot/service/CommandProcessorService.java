@@ -28,7 +28,10 @@ public abstract class CommandProcessorService {
 			processParkCommand(inputStrArr);
 			break;
 		case Constants.LEAVE:
-			break;
+			if(inputStrArr.length != 2) {
+				throw new Exception("Invalid no of arguments for command : " + Constants.LEAVE);
+			}
+			throw new Exception("no implementation");
 		case Constants.STATUS:
 			break;
 		case Constants.REGISTRATION_NUMBERS_FOR_CARS_WITH_COLOUR:

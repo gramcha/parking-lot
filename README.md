@@ -42,5 +42,11 @@ Here, following things are happening
 Problem statement: At the exit the customer returns the ticket which then marks the slot they were using as being available.
 ```
 
-We need to remove the slot from alloted slots collection and add that slot into free available slots
-			
+We need to remove the slot from alloted slots collection and add that slot into free available slots. There is no explanation if that slot is not in given parking lot. For example: parking lot capacity is 10 and deallocation request comes 100. 
+
+There is hint in instruction part.
+```
+We’re also interested in understanding how you make assumptions when building software. If a	 particular workflow or boundary condition is not defined in the problem statement below, what you do is your choice.
+```
+
+So in this case we will return **Not Found** as result if slot number is not in parkinglot capacity range.

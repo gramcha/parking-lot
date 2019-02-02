@@ -57,4 +57,10 @@ public class DefaultIndexAndQueryService implements IndexAndQueryService {
 		return null;
 	}
 
+	@Override
+	public List<Integer> getSlotNumbersOfAllocatedCar(String color) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

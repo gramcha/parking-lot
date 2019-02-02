@@ -77,4 +77,19 @@ public class DefaultIndexAndQueryServiceTest {
 		Integer slotNumber = indexAndQueryService.getSlotNumberOfAllocatedCar("KA-01-HH-1234");
 		assertEquals(null,slotNumber);
 	}
+	@Test
+	public void WhenSlotIsAllocatedQueryServiceShouldReturnCarSlotNumbersForGivenColor() {
+		Car car = new Car("KA-01-HH-1234", "White");
+		Ticket ticket = parkingLotService.allocateSlot(car);
+		System.out.println(ticket);
+		Car car2 = new Car("KA-01-HH-9999", "White");
+		Ticket ticket2 = parkingLotService.allocateSlot(car2);
+		System.out.println(ticket2);
+		Car car3 = new Car("KA-01-HH-3141", "Black");
+		Ticket ticket3 = parkingLotService.allocateSlot(car3);
+		System.out.println(ticket3);
+		List<Integer> slotNumbers = indexAndQueryService.getSlotNumbersOfAllocatedCar(car.getColor());
+		assertTrue(slotNumbers.contains(ticket.getAllottedSlot()));
+		assertTrue(slotNumbers.contains(ticket2.getAllottedSlot()));
+	}
 }

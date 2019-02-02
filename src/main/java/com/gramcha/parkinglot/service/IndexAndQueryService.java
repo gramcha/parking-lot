@@ -12,5 +12,6 @@ public interface IndexAndQueryService {
 	//search operations
 	List<String> getCarRegistrationNumbers(String color);
 	Integer getSlotNumberOfAllocatedCar(String registrationNumber);
+	List<Integer> getSlotNumbersOfAllocatedCar(String color);
 	
 }

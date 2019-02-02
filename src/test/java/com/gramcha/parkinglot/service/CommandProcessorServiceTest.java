@@ -59,4 +59,12 @@ public class CommandProcessorServiceTest {
 	public void WhenInValidCommandForLeavingACarGivenThereShouldBeAnException() throws Exception {
 		commandProcessorService.process("leave");
 	}
+	@Test
+	public void WhenValidCommandForStatusGivenThereShouldNotBeAnyException() {
+		try {
+			commandProcessorService.process("status");
+		} catch (Exception e) {
+			assertTrue(false);
+		}
+	}
 }

@@ -33,7 +33,10 @@ public abstract class CommandProcessorService {
 			processLeaveCommand(inputStrArr);
 			break;
 		case Constants.STATUS:
-			break;
+			if(inputStrArr.length != 1) {
+				throw new Exception("Invalid no of arguments for command : " + Constants.STATUS);
+			}
+			throw new Exception("no implementation");
 		case Constants.REGISTRATION_NUMBERS_FOR_CARS_WITH_COLOUR:
 			break;
 		case Constants.SLOT_NUMBERS_FOR_CARS_WITH_COLOUR:

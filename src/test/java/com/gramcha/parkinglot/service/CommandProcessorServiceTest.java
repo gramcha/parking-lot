@@ -24,4 +24,19 @@ public class CommandProcessorServiceTest {
 			assertTrue(false);
 		}
 	}
+	
+	@Test(expected=Exception.class)
+	public void WhenInValidCommandForCreateParkingLotGivenThereShouldNotbeAnyException() throws Exception {
+		commandProcessorService.process("create_parking_lot");
+	}
+	
+	@Test
+	public void WhenValidCommandForParkingACarGivenThereShouldNotbeAnyException() {
+		try {
+			commandProcessorService.process("park KA-01-HH-1234 White");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			assertTrue(false);
+		}
+	}
 }

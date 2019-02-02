@@ -23,7 +23,11 @@ public abstract class CommandProcessorService {
 			processCreateParkingLotCommand(inputStrArr);
 			break;
 		case Constants.PARK:
-			break;
+			if(inputStrArr.length != 3) {
+				throw new Exception("Invalid no of arguments for command : " + Constants.PARK);
+			} 
+			throw new Exception("no implementation");
+			
 		case Constants.LEAVE:
 			break;
 		case Constants.STATUS:

@@ -20,6 +20,7 @@ public class DefaultIndexAndQueryService implements IndexAndQueryService {
 			colorBasedList = colorBasedIndex.get(ticket.getColor());
 		} else {
 			colorBasedList = new ArrayList<>();
+			colorBasedIndex.put(ticket.getColor(), colorBasedList);
 		}
 		colorBasedList.add(ticket);
 		registrationNumberBasedIndex.put(ticket.getRegistrationNumber(), ticket);
@@ -32,6 +33,11 @@ public class DefaultIndexAndQueryService implements IndexAndQueryService {
 			List<Ticket> colorBasedList = colorBasedIndex.get(ticket.getColor());
 			colorBasedList.removeIf(t->t.getRegistrationNumber().equals(ticket.getRegistrationNumber()));
 		}
+	}
+
+	@Override
+	public List<String> getCarRegistrationNumbers(String color) {
+		return null;
 	}
 
 }

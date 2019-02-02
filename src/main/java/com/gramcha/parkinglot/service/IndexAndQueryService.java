@@ -8,4 +8,7 @@ public interface IndexAndQueryService {
 	//indexing operations
 	void addIndex(Ticket ticket);
 	void removeIndex(Ticket ticket);
+	
+	//search operations
+	List<String> getCarRegistrationNumbers(String color);
 }

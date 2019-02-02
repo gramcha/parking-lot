@@ -10,4 +10,6 @@ public interface ParkingLotService {
 	Ticket allocateSlot(Car car);
 
 	String deallocateSlot(int slotNumber);
+	
+	IndexAndQueryService getIndexAndQueryService();
 }

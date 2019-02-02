@@ -40,4 +40,9 @@ public class DefaultParkingLotService implements ParkingLotService{
 		return "Slot number "+ticket.getAllottedSlot()+" is free";
 		
 	}
+
+	@Override
+	public IndexAndQueryService getIndexAndQueryService() {
+		return indexAndQueryService;
+	}
 }

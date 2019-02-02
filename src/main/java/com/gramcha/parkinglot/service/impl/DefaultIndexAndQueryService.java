@@ -72,7 +72,7 @@ public class DefaultIndexAndQueryService implements IndexAndQueryService {
 
 	@Override
 	public void printStatus() {
-		String header = "Slot No.\tRegistration No\tColour";
+		String header = "Slot No.    Registration No    Colour";
 		System.out.println(header);
 		Comparator<Entry<String, Ticket>> valueComparator = getValueComparator();
 		Map<String, Ticket> result = registrationNumberBasedIndex.entrySet()
@@ -82,9 +82,9 @@ public class DefaultIndexAndQueryService implements IndexAndQueryService {
 		StringBuilder builder = new StringBuilder();
 		result.forEach((key, value) -> {
 			builder.append(value.getAllottedSlot());
-			builder.append("\t");
+			builder.append("           ");
 			builder.append(value.getRegistrationNumber());
-			builder.append("\t");
+			builder.append("      ");
 			builder.append(value.getColor());
 			builder.append("\n");
 		});

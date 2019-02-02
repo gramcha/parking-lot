@@ -50,3 +50,14 @@ We’re also interested in understanding how you make assumptions when building 
 ```
 
 So in this case we will return **Not Found** as result if slot number is not in parkinglot capacity range.
+
+## 5. Querying based on different conditions
+```
+Due to government regulation, the system should provide me with the ability to find
+out:
+● Registration numbers of all cars of a particular colour.
+● Slot number in which a car with a given registration number is parked.
+● Slot numbers of all slots where a car of a particular colour is parked.
+```
+
+In order to get this information quickly lets index the Ticket in memory. We will fetch the results for above query from those indexes. Indexes will be updated whenever there is a slot allocated or deallocated for a car. 

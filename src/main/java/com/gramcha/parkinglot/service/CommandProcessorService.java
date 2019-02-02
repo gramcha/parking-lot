@@ -5,7 +5,7 @@ import com.gramcha.parkinglot.Constants;
 public abstract class CommandProcessorService {
 	public abstract void parse() throws Exception;
 
-	public void process(String line) {
+	public void process(String line) throws Exception {
 		String[] inputStrArr = line.split(" ");
 		if (inputStrArr[0].equals("")) {
 			System.out.println("Invalid command");
@@ -14,7 +14,8 @@ public abstract class CommandProcessorService {
 		String commandStr = inputStrArr[0];
 		switch(commandStr) {
 		case Constants.CREATE_PARKING_LOT:
-			break;
+			throw new Exception("no implementation");
+			
 		case Constants.PARK:
 			break;
 		case Constants.LEAVE:

@@ -69,4 +69,8 @@ public class CommandProcessorServiceTest {
 			assertTrue(false);
 		}
 	}
+	@Test(expected=Exception.class)
+	public void WhenInValidStatusCommandGivenThereShouldBeAnException() throws Exception {
+		commandProcessorService.process("status 12");
+	}
 }

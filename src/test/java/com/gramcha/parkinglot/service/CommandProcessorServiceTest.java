@@ -26,7 +26,7 @@ public class CommandProcessorServiceTest {
 	}
 	
 	@Test(expected=Exception.class)
-	public void WhenInValidCommandForCreateParkingLotGivenThereShouldNotbeAnyException() throws Exception {
+	public void WhenInValidCommandForCreateParkingLotGivenThereShouldBeAnException() throws Exception {
 		commandProcessorService.process("create_parking_lot");
 	}
 	
@@ -34,9 +34,17 @@ public class CommandProcessorServiceTest {
 	public void WhenValidCommandForParkingACarGivenThereShouldNotbeAnyException() {
 		try {
 			commandProcessorService.process("park KA-01-HH-1234 White");
+			commandProcessorService.process("park KA-01-HH-9999 White");
+			commandProcessorService.process("park KA-01-BB-0001 Black");
+			commandProcessorService.process("park KA-01-HH-7777 Red");
+			commandProcessorService.process("park KA-01-HH-2701 Blue");
+			commandProcessorService.process("park KA-01-HH-3141 Black");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			assertTrue(false);
 		}
+	}
+	@Test(expected=Exception.class)
+	public void WhenInValidCommandForParkingACarGivenThereShouldBeAnException() throws Exception {
+		commandProcessorService.process("park KA-01-HH-1234");
 	}
 }

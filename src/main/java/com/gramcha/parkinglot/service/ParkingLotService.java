@@ -8,4 +8,6 @@ public interface ParkingLotService {
 	ParkingLot createParkingLot(int noOfParkingSlots);
 
 	Ticket allocateSlot(Car car);
+
+	String deallocateSlot(int slotNumber);
 }

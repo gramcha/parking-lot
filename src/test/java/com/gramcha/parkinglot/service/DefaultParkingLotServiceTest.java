@@ -85,4 +85,14 @@ public class DefaultParkingLotServiceTest {
 		//TODO: to simulate this case we need to remove some car closer to entry. We can revisit this after completing deallocation of a slot.
 		
 	}
+	
+	@Test
+	public void whenCarLeavesFromParkingLotThatSlotShouldBecomeFree() {
+		Car car = new Car("KA-01-HH-9999","White");
+		Ticket ticket = parkingLotService.allocateSlot(car);
+		System.out.println(ticket);
+		String message = parkingLotService.deallocateSlot(ticket.getAllottedSlot());
+		assertNotNull(message);
+		System.out.println(message);
+	}
 }

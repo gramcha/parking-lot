@@ -17,32 +17,37 @@ public class DefaultParkingLotService implements ParkingLotService{
 	//this holds the recently created parking lot - as per current requirement single parking lot.
 	ParkingLot currentLot; 
 
-	IndexAndQueryService indexAndQueryService = new DefaultIndexAndQueryService();
+	Map<String, IndexAndQueryService> parkingLotsIndexServices = new HashMap<>();
+	IndexAndQueryService currentIndexAndQueryService;
 	
 	public ParkingLot createParkingLot(int noOfParkingSlots) {
 		// TODO Auto-generated method stub
 		ParkingLot newParkingLot = new ParkingLot(noOfParkingSlots);
 		parkingLots.put(newParkingLot.getId(), newParkingLot);
+		
+		IndexAndQueryService newParkingLotIndexService = new DefaultIndexAndQueryService();
+		currentIndexAndQueryService = newParkingLotIndexService;
+		parkingLotsIndexServices.put(newParkingLot.getId(), currentIndexAndQueryService);
 		currentLot = newParkingLot;
 		return newParkingLot;
 	}
 	
 	public Ticket allocateSlot(Car car) {
 		Ticket ticket = currentLot.allocateSlot(car);
-		indexAndQueryService.addIndex(ticket);
+		currentIndexAndQueryService.addIndex(ticket);
 		return ticket;
 	}
 	public String deallocateSlot(int slotNumber) {
 		Ticket ticket = currentLot.deallocateSlot(slotNumber);
 		if(ticket==null)
 			return "Not found";
-		indexAndQueryService.removeIndex(ticket);
+		currentIndexAndQueryService.removeIndex(ticket);
 		return "Slot number "+ticket.getAllottedSlot()+" is free";
 		
 	}
 
 	@Override
 	public IndexAndQueryService getIndexAndQueryService() {
-		return indexAndQueryService;
+		return currentIndexAndQueryService;
 	}
 }

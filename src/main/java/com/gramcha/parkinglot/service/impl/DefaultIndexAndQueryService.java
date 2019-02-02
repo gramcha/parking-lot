@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.gramcha.parkinglot.model.Ticket;
 import com.gramcha.parkinglot.service.IndexAndQueryService;
@@ -37,7 +38,12 @@ public class DefaultIndexAndQueryService implements IndexAndQueryService {
 
 	@Override
 	public List<String> getCarRegistrationNumbers(String color) {
-		return null;
+		List<Ticket> tickets = colorBasedIndex.get(color);
+		if(tickets==null)
+			return new ArrayList<String>();
+		System.out.println(tickets.size());
+		List<String> regNumbers = tickets.stream().map(t->{return t.getRegistrationNumber();}).collect(Collectors.toList());
+		return regNumbers;
 	}
 
 }

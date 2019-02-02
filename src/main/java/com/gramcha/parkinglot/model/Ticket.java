@@ -33,7 +33,7 @@ public class Ticket {
 		if (allottedSlot == -1) {
 			return "Sorry, parking lot is full";
 		} else {
-			return "Allocated slot number: " + allottedSlot;
+			return "Allocated slot number: " + getAllottedSlot();
 		}
 	}
 }

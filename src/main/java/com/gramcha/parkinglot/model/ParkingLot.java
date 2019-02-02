@@ -66,13 +66,15 @@ public class ParkingLot {
 		return sortedFreeSlots.pollFirst();
 	}
 	
-	public String deallocateSlot(int slotNumber) {
+	public Ticket deallocateSlot(int slotNumber) {
+		Ticket ticket = null;
 		if((slotNumber>0 && slotNumber<= numberOfSlots)==false)
-			return "Not found";
+			return ticket;
 		if(allotedSlots.containsKey(slotNumber)) {
-			allotedSlots.remove(slotNumber);
+			Car car = allotedSlots.remove(slotNumber);
+			ticket = new Ticket(car.getRegistrationNumber(),car.getColor(),slotNumber,false);
 		}
 		sortedFreeSlots.add(slotNumber);
-		return "Slot number "+slotNumber+" is free";
+		return ticket;
 	}
 }

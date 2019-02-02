@@ -6,6 +6,7 @@ import java.util.Map;
 import com.gramcha.parkinglot.model.Car;
 import com.gramcha.parkinglot.model.ParkingLot;
 import com.gramcha.parkinglot.model.Ticket;
+import com.gramcha.parkinglot.service.IndexAndQueryService;
 import com.gramcha.parkinglot.service.ParkingLotService;
 
 public class DefaultParkingLotService implements ParkingLotService{
@@ -15,6 +16,8 @@ public class DefaultParkingLotService implements ParkingLotService{
 	
 	//this holds the recently created parking lot - as per current requirement single parking lot.
 	ParkingLot currentLot; 
+
+	IndexAndQueryService indexAndQueryService = new DefaultIndexAndQueryService();
 	
 	public ParkingLot createParkingLot(int noOfParkingSlots) {
 		// TODO Auto-generated method stub
@@ -25,9 +28,16 @@ public class DefaultParkingLotService implements ParkingLotService{
 	}
 	
 	public Ticket allocateSlot(Car car) {
-		return currentLot.allocateSlot(car);
+		Ticket ticket = currentLot.allocateSlot(car);
+		indexAndQueryService.addIndex(ticket);
+		return ticket;
 	}
 	public String deallocateSlot(int slotNumber) {
-		return currentLot.deallocateSlot(slotNumber);
+		Ticket ticket = currentLot.deallocateSlot(slotNumber);
+		if(ticket==null)
+			return "Not found";
+		indexAndQueryService.removeIndex(ticket);
+		return "Slot number "+ticket.getAllottedSlot()+" is free";
+		
 	}
 }

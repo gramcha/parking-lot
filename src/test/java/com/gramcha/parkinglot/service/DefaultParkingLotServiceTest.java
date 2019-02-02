@@ -50,7 +50,7 @@ public class DefaultParkingLotServiceTest {
 		Ticket ticket = parkingLotService.allocateSlot(car);
 		assertEquals(car.getRegistrationNumber(),ticket.getRegistrationNumber());
 		assertEquals(car.getColor(),ticket.getColor());
-		assertNotEquals(-1,ticket.getAllottedSlot());
+		assertEquals(true,ticket.isAlloted());
 		System.out.println(ticket);
 	}
 	
@@ -61,7 +61,7 @@ public class DefaultParkingLotServiceTest {
 			Ticket ticket = parkingLotService.allocateSlot(car);
 			assertEquals(car.getRegistrationNumber(),ticket.getRegistrationNumber());
 			assertEquals(car.getColor(),ticket.getColor());
-			assertNotEquals(-1,ticket.getAllottedSlot());
+			assertEquals(true,ticket.isAlloted());
 			System.out.println(ticket);
 		}
 	}
@@ -76,7 +76,7 @@ public class DefaultParkingLotServiceTest {
 		}
 		Car car = new Car("KA-01-HH-9999","White");
 		Ticket ticket = parkingLotService.allocateSlot(car);
-		assertEquals(-1,ticket.getAllottedSlot());
+		assertEquals(false,ticket.isAlloted());
 		assertEquals("Sorry, parking lot is full",ticket.toString());
 		System.out.println(ticket);
 	}

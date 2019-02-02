@@ -47,12 +47,19 @@ public class ParkingLot {
 	public Ticket allocateSlot(Car car) {
 		Integer availableFreeSlot = getAvailableFreeSlotCloserToEntry();
 		if(availableFreeSlot==null) {
-			Ticket ticket = new Ticket(car.getRegistrationNumber(),car.getColor(),-1);
-			return ticket;
+			return getRejectionTicket(car);
 		}
 		allotedSlots.put(availableFreeSlot, car);
-		
-		Ticket ticket = new Ticket(car.getRegistrationNumber(),car.getColor(),availableFreeSlot);
+		return getAllocatedTicket(car, availableFreeSlot);
+	}
+
+	private Ticket getAllocatedTicket(Car car, Integer availableFreeSlot) {
+		Ticket ticket = new Ticket(car.getRegistrationNumber(),car.getColor(),availableFreeSlot,true);
+		return ticket;
+	}
+
+	private Ticket getRejectionTicket(Car car) {
+		Ticket ticket = new Ticket(car.getRegistrationNumber(),car.getColor(),-1,false);
 		return ticket;
 	}
 	private Integer getAvailableFreeSlotCloserToEntry() {

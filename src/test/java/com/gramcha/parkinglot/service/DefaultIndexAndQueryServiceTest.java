@@ -18,7 +18,7 @@ import com.gramcha.parkinglot.service.impl.DefaultParkingLotService;
 public class DefaultIndexAndQueryServiceTest {
 	private static ParkingLotService parkingLotService;
 	static final int noOfParkingSlots = 10;
-	private ParkingLot parkingLotInstance;
+	
 	private IndexAndQueryService indexAndQueryService;
 
 	@BeforeClass
@@ -28,7 +28,6 @@ public class DefaultIndexAndQueryServiceTest {
 
 	@Before
 	public void beforeEachTest() {
-		parkingLotInstance = parkingLotService.createParkingLot(noOfParkingSlots);
 		indexAndQueryService = parkingLotService.getIndexAndQueryService();
 	}
 
@@ -56,7 +55,7 @@ public class DefaultIndexAndQueryServiceTest {
 	}
 	
 	@Test
-	public void WhenSlotIsAllocatedCarsColorNotHavingGivenColorThenQueryServiceShouldReturnEmptyList() {
+	public void WhenSlotAllocatedCarsNotHavingGivenColorThenQueryServiceShouldReturnEmptyRegistrationNumberList() {
 		Car car = new Car("KA-01-HH-1234", "White");
 		Ticket ticket = parkingLotService.allocateSlot(car);
 		System.out.println(ticket);
@@ -91,5 +90,15 @@ public class DefaultIndexAndQueryServiceTest {
 		List<Integer> slotNumbers = indexAndQueryService.getSlotNumbersOfAllocatedCar(car.getColor());
 		assertTrue(slotNumbers.contains(ticket.getAllottedSlot()));
 		assertTrue(slotNumbers.contains(ticket2.getAllottedSlot()));
+		assertEquals(2, slotNumbers.size());
+		System.out.println(slotNumbers);
+	}
+	@Test
+	public void WhenSlotAllocatedCarsNotHavingGivenColorThenQueryServiceShouldReturnEmptySlotNumberList() {
+		Car car = new Car("KA-01-HH-1234", "White");
+		Ticket ticket = parkingLotService.allocateSlot(car);
+		System.out.println(ticket);
+		List<Integer> slotNumbers = indexAndQueryService.getSlotNumbersOfAllocatedCar("Black");
+		assertEquals(0, slotNumbers.size());
 	}
 }

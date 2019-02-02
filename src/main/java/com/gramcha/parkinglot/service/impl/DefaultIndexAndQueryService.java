@@ -59,8 +59,14 @@ public class DefaultIndexAndQueryService implements IndexAndQueryService {
 
 	@Override
 	public List<Integer> getSlotNumbersOfAllocatedCar(String color) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Ticket> tickets = colorBasedIndex.get(color);
+		if (tickets == null)
+			return new ArrayList<Integer>();
+		System.out.println(tickets.size());
+		List<Integer> slotNumbers = tickets.stream().map(t -> {
+			return t.getAllottedSlot();
+		}).collect(Collectors.toList());
+		return slotNumbers;
 	}
 
 }

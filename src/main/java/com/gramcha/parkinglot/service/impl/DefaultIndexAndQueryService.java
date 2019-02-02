@@ -46,4 +46,10 @@ public class DefaultIndexAndQueryService implements IndexAndQueryService {
 		return regNumbers;
 	}
 
+	@Override
+	public Integer getSlotNumberOfAllocatedCar(String registrationNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

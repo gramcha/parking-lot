@@ -54,6 +54,7 @@ public class DefaultIndexAndQueryServiceTest {
 		assertEquals(2, registrationNumbers.size());
 		System.out.println(registrationNumbers);
 	}
+	
 	@Test
 	public void WhenSlotIsAllocatedCarsColorNotHavingGivenColorThenQueryServiceShouldReturnEmptyList() {
 		Car car = new Car("KA-01-HH-1234", "White");
@@ -61,5 +62,14 @@ public class DefaultIndexAndQueryServiceTest {
 		System.out.println(ticket);
 		List<String> registrationNumbers = indexAndQueryService.getCarRegistrationNumbers("Black");
 		assertEquals(0, registrationNumbers.size());
+	}
+	
+	@Test
+	public void WhenSlotAllocatedQueryServiceShouldReturnTheSlotNumberForGivenRegistrationNumber() {
+		Car car = new Car("KA-01-HH-1234", "White");
+		Ticket ticket = parkingLotService.allocateSlot(car);
+		System.out.println(ticket);
+		Integer slotNumber = indexAndQueryService.getSlotNumberOfAllocatedCar(car.getRegistrationNumber());
+		assertEquals((Integer)ticket.getAllottedSlot(),slotNumber);
 	}
 }

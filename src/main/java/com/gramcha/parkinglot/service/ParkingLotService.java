@@ -1,5 +1,7 @@
 package com.gramcha.parkinglot.service;
 
+import com.gramcha.parkinglot.model.ParkingLot;
+
 public interface ParkingLotService {
-	String createParkingLot(int noOfParkingSlots);
+	ParkingLot createParkingLot(int noOfParkingSlots);
 }

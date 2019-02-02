@@ -3,11 +3,14 @@ package com.gramcha.parkinglot.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.gramcha.parkinglot.model.ParkingLot;
 import com.gramcha.parkinglot.service.impl.DefaultParkingLotService;
 
 public class DefaultParkingLotServiceTest {
@@ -27,7 +30,8 @@ public class DefaultParkingLotServiceTest {
 	@Test
 	public void createParkinglotForGivenNumberOfSlotsAndReturnParkingLotId() {
 		int noOfParkingSlots = 10;
-		String parkingLotId = parkingLotService.createParkingLot(noOfParkingSlots );
-		assertNotNull(parkingLotId);
+		ParkingLot newParkingLot  = parkingLotService.createParkingLot(noOfParkingSlots);
+	    assertNotNull(newParkingLot);
+	    assertEquals(noOfParkingSlots, newParkingLot.getNumberOfSlots());
 	}
 }

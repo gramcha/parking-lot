@@ -45,7 +45,10 @@ public abstract class CommandProcessorService {
 			processSlotNumbersForCarsWithColourCommand(inputStrArr);
 			break;
 		case Constants.SLOT_NUMBER_FOR_REGISTRATION_NUMBER:
-			break;
+			if(inputStrArr.length != 2) {
+				throw new Exception("Invalid no of arguments for command : " + Constants.SLOT_NUMBERS_FOR_CARS_WITH_COLOUR);
+			}
+			throw new Exception("no implementation");
 		default:
 			System.out.println("Invalid command");
 		}

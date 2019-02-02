@@ -39,6 +39,7 @@ public class CommandProcessorServiceTest {
 			commandProcessorService.process("park KA-01-HH-7777 Red");
 			commandProcessorService.process("park KA-01-HH-2701 Blue");
 			commandProcessorService.process("park KA-01-HH-3141 Black");
+			commandProcessorService.process("park KA-01-P-333 White");
 		} catch (Exception e) {
 			assertTrue(false);
 		}

@@ -35,7 +35,8 @@ public class DefaultParkingLotService implements ParkingLotService{
 	
 	public Ticket allocateSlot(Car car) {
 		Ticket ticket = currentLot.allocateSlot(car);
-		currentIndexAndQueryService.addIndex(ticket);
+		if(ticket.isAlloted())
+			currentIndexAndQueryService.addIndex(ticket);
 		return ticket;
 	}
 	public String deallocateSlot(int slotNumber) {

@@ -18,5 +18,11 @@ public class Ticket {
 	public int getAllottedSlot() {
 		return allottedSlot;
 	}
-	
+	public String toString() {
+		if(allottedSlot == -1) {
+			return "Sorry, parking lot is full";
+		} else {
+			return "Allocated slot number: "+allottedSlot;
+		}
+	}
 }

@@ -25,6 +25,6 @@ public class DefaultParkingLotService implements ParkingLotService{
 	}
 	
 	public Ticket allocateSlot(Car car) {
-		return null;
+		return currentLot.allocateSlot(car);
 	}
 }

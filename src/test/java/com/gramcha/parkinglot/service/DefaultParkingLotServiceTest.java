@@ -1,6 +1,7 @@
 package com.gramcha.parkinglot.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 
@@ -46,7 +47,11 @@ public class DefaultParkingLotServiceTest {
 	
 	@Test
 	public void whenParkingLotHaveFreeSlotsAllocateASlotToACar() {
-		Ticket ticket = parkingLotService.allocateSlot(new Car("KA-01-HH-1234","White"));
-		assertNotNull(ticket);
+		Car car = new Car("KA-01-HH-1234","White");
+		Ticket ticket = parkingLotService.allocateSlot(car);
+		assertEquals(car.getRegistrationNumber(),ticket.getRegistrationNumber());
+		assertEquals(car.getColor(),ticket.getColor());
+		assertNotEquals("-1",ticket.getAllottedSlot());
+		System.out.println(ticket);
 	}
 }

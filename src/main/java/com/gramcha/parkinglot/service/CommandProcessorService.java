@@ -45,12 +45,23 @@ public abstract class CommandProcessorService {
 			processSlotNumbersForCarsWithColourCommand(inputStrArr);
 			break;
 		case Constants.SLOT_NUMBER_FOR_REGISTRATION_NUMBER:
-			if(inputStrArr.length != 2) {
-				throw new Exception("Invalid no of arguments for command : " + Constants.SLOT_NUMBERS_FOR_CARS_WITH_COLOUR);
-			}
-			throw new Exception("no implementation");
+			processSlotNumberForRegistrationNumberCommand(inputStrArr);
+			break;
 		default:
 			System.out.println("Invalid command");
+		}
+	}
+
+	private void processSlotNumberForRegistrationNumberCommand(String[] inputStrArr) throws Exception {
+		if(inputStrArr.length != 2) {
+			throw new Exception("Invalid no of arguments for command : " + Constants.SLOT_NUMBERS_FOR_CARS_WITH_COLOUR);
+		}
+		IndexAndQueryService indexAndQueryService = parkingLotService.getIndexAndQueryService();
+		Integer slotNumber= indexAndQueryService.getSlotNumberOfAllocatedCar(inputStrArr[1]);
+		if(slotNumber!=null) {
+			System.out.println(slotNumber);
+		} else {
+			System.out.println("Not found");
 		}
 	}
 

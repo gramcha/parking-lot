@@ -108,4 +108,17 @@ public class CommandProcessorServiceTest {
 			assertTrue(false);
 		}
 	}
+	@Test(expected=Exception.class)
+	public void WhenInValidSlot_number_for_registration_numberCommandGivenThereShouldBeAnException() throws Exception {
+		commandProcessorService.process("slot_number_for_registration_number KA-01-HH-3141");
+	}
+	
+	@Test
+	public void WhenEmptyCommandPassedThereShouldBeNoException() throws Exception {
+		commandProcessorService.process("");
+	}
+	@Test
+	public void WhenInvalidCommandPassedThereShouldBeNoException() throws Exception {
+		commandProcessorService.process("RAIL");
+	}
 }

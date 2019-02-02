@@ -104,12 +104,12 @@ public class SampleTestCaseFromProblemStatement {
 		
 //		registration_numbers_for_cars_with_colour White
 		List<String> registrationNumbers = indexAndQueryService.getCarRegistrationNumbers("White");
-		//TODO: result should come with out boxes. currently list tostring adds the boxes [1, 2, 4]
+		//TODO: result should come with out boxes. currently list tostring adds the boxes [KA-01-HH-1234, KA-01-HH-9999, KA-01-P-333]
 		System.out.println(registrationNumbers);
 		
 //		slot_numbers_for_cars_with_colour White
 		List<Integer> slotNumbers = indexAndQueryService.getSlotNumbersOfAllocatedCar("White");
-		//TODO: result should come with out boxes. currently list tostring adds the boxes [KA-01-HH-1234, KA-01-HH-9999, KA-01-P-333]
+		//TODO: result should come with out boxes. currently list tostring adds the boxes [1, 2, 4]
 		System.out.println(slotNumbers);
 		
 //		slot_number_for_registration_number KA-01-HH-3141

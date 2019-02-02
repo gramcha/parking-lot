@@ -29,6 +29,7 @@ public class DefaultParkingLotService implements ParkingLotService{
 		currentIndexAndQueryService = newParkingLotIndexService;
 		parkingLotsIndexServices.put(newParkingLot.getId(), currentIndexAndQueryService);
 		currentLot = newParkingLot;
+		System.out.println("Created a parking lot with "+noOfParkingSlots+" slots");
 		return newParkingLot;
 	}
 	

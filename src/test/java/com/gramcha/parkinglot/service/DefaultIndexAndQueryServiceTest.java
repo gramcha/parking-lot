@@ -72,4 +72,9 @@ public class DefaultIndexAndQueryServiceTest {
 		Integer slotNumber = indexAndQueryService.getSlotNumberOfAllocatedCar(car.getRegistrationNumber());
 		assertEquals((Integer)ticket.getAllottedSlot(),slotNumber);
 	}
+	@Test
+	public void WhenGivenCarNotAllocatedQueryServiceShouldReturnTheNullForGivenRegistrationNumber() {
+		Integer slotNumber = indexAndQueryService.getSlotNumberOfAllocatedCar("KA-01-HH-1234");
+		assertEquals(null,slotNumber);
+	}
 }

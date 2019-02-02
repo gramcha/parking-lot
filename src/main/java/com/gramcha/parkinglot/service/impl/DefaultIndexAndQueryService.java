@@ -32,23 +32,28 @@ public class DefaultIndexAndQueryService implements IndexAndQueryService {
 		registrationNumberBasedIndex.remove(ticket.getRegistrationNumber());
 		if (colorBasedIndex.containsKey(ticket.getColor())) {
 			List<Ticket> colorBasedList = colorBasedIndex.get(ticket.getColor());
-			colorBasedList.removeIf(t->t.getRegistrationNumber().equals(ticket.getRegistrationNumber()));
+			colorBasedList.removeIf(t -> t.getRegistrationNumber().equals(ticket.getRegistrationNumber()));
 		}
 	}
 
 	@Override
 	public List<String> getCarRegistrationNumbers(String color) {
 		List<Ticket> tickets = colorBasedIndex.get(color);
-		if(tickets==null)
+		if (tickets == null)
 			return new ArrayList<String>();
 		System.out.println(tickets.size());
-		List<String> regNumbers = tickets.stream().map(t->{return t.getRegistrationNumber();}).collect(Collectors.toList());
+		List<String> regNumbers = tickets.stream().map(t -> {
+			return t.getRegistrationNumber();
+		}).collect(Collectors.toList());
 		return regNumbers;
 	}
 
 	@Override
 	public Integer getSlotNumberOfAllocatedCar(String registrationNumber) {
-		// TODO Auto-generated method stub
+		if (registrationNumberBasedIndex.containsKey(registrationNumber)) {
+			Ticket ticket = registrationNumberBasedIndex.get(registrationNumber);
+			return ticket.getAllottedSlot();
+		}
 		return null;
 	}
 

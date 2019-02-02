@@ -1,14 +1,12 @@
 package com.gramcha.parkinglot.service;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.util.Iterator;
 import java.util.List;
 
-import com.gramcha.parkinglot.Constants;
 import com.gramcha.parkinglot.model.Car;
 import com.gramcha.parkinglot.model.Ticket;
 import com.gramcha.parkinglot.service.impl.DefaultParkingLotService;
+import com.gramcha.parkinglot.utils.Constants;
 
 public abstract class CommandProcessorService {
 	private ParkingLotService parkingLotService = new DefaultParkingLotService();
@@ -47,6 +45,8 @@ public abstract class CommandProcessorService {
 		case Constants.SLOT_NUMBER_FOR_REGISTRATION_NUMBER:
 			processSlotNumberForRegistrationNumberCommand(inputStrArr);
 			break;
+		case Constants.EXIT:
+			System.exit(0);
 		default:
 			System.out.println("Invalid command");
 		}
@@ -57,6 +57,9 @@ public abstract class CommandProcessorService {
 			throw new Exception("Invalid no of arguments for command : " + Constants.SLOT_NUMBERS_FOR_CARS_WITH_COLOUR);
 		}
 		IndexAndQueryService indexAndQueryService = parkingLotService.getIndexAndQueryService();
+		if(indexAndQueryService==null) {
+			throw new Exception("empty parkinglot");
+		}
 		Integer slotNumber= indexAndQueryService.getSlotNumberOfAllocatedCar(inputStrArr[1]);
 		if(slotNumber!=null) {
 			System.out.println(slotNumber);
@@ -70,6 +73,9 @@ public abstract class CommandProcessorService {
 			throw new Exception("Invalid no of arguments for command : " + Constants.SLOT_NUMBERS_FOR_CARS_WITH_COLOUR);
 		}
 		IndexAndQueryService indexAndQueryService = parkingLotService.getIndexAndQueryService();
+		if(indexAndQueryService==null) {
+			throw new Exception("empty parkinglot");
+		}
 		List<Integer> slotNumbers = indexAndQueryService.getSlotNumbersOfAllocatedCar(inputStrArr[1]);
 		if(slotNumbers.isEmpty()) {
 			System.out.println("Not found");
@@ -90,6 +96,9 @@ public abstract class CommandProcessorService {
 			throw new Exception("Invalid no of arguments for command : " + Constants.REGISTRATION_NUMBERS_FOR_CARS_WITH_COLOUR);
 		}
 		IndexAndQueryService indexAndQueryService = parkingLotService.getIndexAndQueryService();
+		if(indexAndQueryService==null) {
+			throw new Exception("empty parkinglot");
+		}
 		List<String> registrationNumbers = indexAndQueryService.getCarRegistrationNumbers(inputStrArr[1]);
 		if(registrationNumbers.isEmpty()) {
 			System.out.println("Not found");
@@ -110,6 +119,9 @@ public abstract class CommandProcessorService {
 			throw new Exception("Invalid no of arguments for command : " + Constants.STATUS);
 		}
 		IndexAndQueryService indexAndQueryService = parkingLotService.getIndexAndQueryService();
+		if(indexAndQueryService==null) {
+			throw new Exception("empty parkinglot");
+		}
 		indexAndQueryService.printStatus();
 	}
 

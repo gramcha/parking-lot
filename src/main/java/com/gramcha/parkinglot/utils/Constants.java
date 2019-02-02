@@ -1,4 +1,4 @@
-package com.gramcha.parkinglot;
+package com.gramcha.parkinglot.utils;
 
 public class Constants {
 
@@ -9,4 +9,5 @@ public class Constants {
 	public static final String REGISTRATION_NUMBERS_FOR_CARS_WITH_COLOUR = "registration_numbers_for_cars_with_colour";
 	public static final String SLOT_NUMBERS_FOR_CARS_WITH_COLOUR = "slot_numbers_for_cars_with_colour";
 	public static final String SLOT_NUMBER_FOR_REGISTRATION_NUMBER = "slot_number_for_registration_number";
+	public static final String EXIT = "exit";
 }

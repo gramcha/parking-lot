@@ -62,4 +62,4 @@ out:
 
 In order to get this information quickly lets index the Ticket in memory. We will fetch the results for above query from those indexes. Indexes will be updated whenever there is a slot allocated or deallocated for a car.
 
-//TODO : commandline and File read support need to be implemented. 
+Commandline and File read support added.	

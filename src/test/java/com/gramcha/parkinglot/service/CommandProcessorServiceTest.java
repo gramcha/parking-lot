@@ -20,7 +20,7 @@ public class CommandProcessorServiceTest {
 		try {
 			commandProcessorService.process("create_parking_lot 6");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			System.out.println(e);
 			assertTrue(false);
 		}
 	}
@@ -48,7 +48,7 @@ public class CommandProcessorServiceTest {
 		commandProcessorService.process("park KA-01-HH-1234");
 	}
 	@Test
-	public void WhenValidCommandForLeavingACarGivenThereShouldNotBeAnyException() {
+	public void WhenValidLeavingACarCommandGivenThereShouldNotBeAnyException() {
 		try {
 			commandProcessorService.process("leave 4");
 		} catch (Exception e) {
@@ -56,14 +56,15 @@ public class CommandProcessorServiceTest {
 		}
 	}
 	@Test(expected=Exception.class)
-	public void WhenInValidCommandForLeavingACarGivenThereShouldBeAnException() throws Exception {
+	public void WhenInValidLeavingACarCommandGivenThereShouldBeAnException() throws Exception {
 		commandProcessorService.process("leave");
 	}
 	@Test
-	public void WhenValidCommandForStatusGivenThereShouldNotBeAnyException() {
+	public void WhenValidStatusCommandGivenThereShouldNotBeAnyException() {
 		try {
 			commandProcessorService.process("status");
 		} catch (Exception e) {
+			System.out.println(e);
 			assertTrue(false);
 		}
 	}

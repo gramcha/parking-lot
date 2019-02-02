@@ -88,7 +88,10 @@ public class DefaultIndexAndQueryService implements IndexAndQueryService {
 			builder.append(value.getColor());
 			builder.append("\n");
 		});
-		System.out.println(builder.toString());
+		if (builder.length() > 0) {
+			builder.deleteCharAt(builder.length() - 1);// removing unwanted newline
+			System.out.println(builder.toString());
+		}
 	}
 
 	private Comparator<Entry<String, Ticket>> getValueComparator() {

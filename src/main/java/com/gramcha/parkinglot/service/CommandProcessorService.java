@@ -33,10 +33,8 @@ public abstract class CommandProcessorService {
 			processLeaveCommand(inputStrArr);
 			break;
 		case Constants.STATUS:
-			if(inputStrArr.length != 1) {
-				throw new Exception("Invalid no of arguments for command : " + Constants.STATUS);
-			}
-			throw new Exception("no implementation");
+			processStatusCommand(inputStrArr);
+			break;
 		case Constants.REGISTRATION_NUMBERS_FOR_CARS_WITH_COLOUR:
 			break;
 		case Constants.SLOT_NUMBERS_FOR_CARS_WITH_COLOUR:
@@ -46,6 +44,16 @@ public abstract class CommandProcessorService {
 		default:
 			System.out.println("Invalid command");
 		}
+	}
+
+	private void processStatusCommand(String[] inputStrArr) throws Exception {
+		if(inputStrArr.length != 1) {
+			throw new Exception("Invalid no of arguments for command : " + Constants.STATUS);
+		}
+		IndexAndQueryService indexAndQueryService = parkingLotService.getIndexAndQueryService();
+		if(null==indexAndQueryService)
+			System.out.println("indexAndQueryService = null");
+		indexAndQueryService.printStatus();
 	}
 
 	private void processLeaveCommand(String[] inputStrArr) throws Exception {

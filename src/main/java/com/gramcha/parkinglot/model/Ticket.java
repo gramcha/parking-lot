@@ -1,20 +1,22 @@
 package com.gramcha.parkinglot.model;
 
-public class Car {
+public class Ticket {
 	private String registrationNumber;
 	private String color;
-
-	public Car(String registrationNumber, String color) {
+	private int allottedSlot;
+	public Ticket(String registrationNumber, String color, int allottedSlot) {
 		this.registrationNumber = registrationNumber;
 		this.color = color;
+		this.allottedSlot = allottedSlot;
 	}
-
 	public String getRegistrationNumber() {
 		return registrationNumber;
 	}
-
 	public String getColor() {
 		return color;
+	}
+	public int getAllottedSlot() {
+		return allottedSlot;
 	}
 	
 }

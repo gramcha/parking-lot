@@ -10,7 +10,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.gramcha.parkinglot.model.Car;
 import com.gramcha.parkinglot.model.ParkingLot;
+import com.gramcha.parkinglot.model.Ticket;
 import com.gramcha.parkinglot.service.impl.DefaultParkingLotService;
 
 public class DefaultParkingLotServiceTest {
@@ -40,5 +42,11 @@ public class DefaultParkingLotServiceTest {
 	@Test
 	public void whenParkingLotCreatedItsFreeSlotsShouldBeEqualToCapacity() {
 		assertEquals(parkingLotInstance.getNumberOfSlots(),parkingLotInstance.getNumberOfFreeSlots());
+	}
+	
+	@Test
+	public void whenParkingLotHaveFreeSlotsAllocateASlotToACar() {
+		Ticket ticket = parkingLotService.allocateSlot(new Car("KA-01-HH-1234","White"));
+		assertNotNull(ticket);
 	}
 }

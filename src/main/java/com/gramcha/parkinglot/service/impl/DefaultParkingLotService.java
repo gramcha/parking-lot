@@ -3,8 +3,9 @@ package com.gramcha.parkinglot.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-
+import com.gramcha.parkinglot.model.Car;
 import com.gramcha.parkinglot.model.ParkingLot;
+import com.gramcha.parkinglot.model.Ticket;
 import com.gramcha.parkinglot.service.ParkingLotService;
 
 public class DefaultParkingLotService implements ParkingLotService{
@@ -21,5 +22,9 @@ public class DefaultParkingLotService implements ParkingLotService{
 		parkingLots.put(newParkingLot.getId(), newParkingLot);
 		currentLot = newParkingLot;
 		return newParkingLot;
+	}
+	
+	public Ticket allocateSlot(Car car) {
+		return null;
 	}
 }
